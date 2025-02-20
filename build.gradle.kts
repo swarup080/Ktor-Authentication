@@ -1,4 +1,3 @@
-
 plugins {
     alias(libs.plugins.kotlin.jvm)
     alias(libs.plugins.ktor)
@@ -12,11 +11,6 @@ application {
 
     val isDevelopment: Boolean = project.ext.has("development")
     applicationDefaultJvmArgs = listOf("-Dio.ktor.development=$isDevelopment")
-}
-tasks.withType<Jar> {
-    manifest {
-        attributes["Main-Class"] = "io.ktor.server.netty.EngineMain"
-    }
 }
 
 repositories {
@@ -33,18 +27,20 @@ dependencies {
     testImplementation(libs.ktor.server.test.host)
     testImplementation(libs.kotlin.test.junit)
 
-    implementation("io.ktor:ktor-server-auth:2.3.0")
-    implementation("io.ktor:ktor-server-auth-jwt:2.3.0")
-    // Exposed Core libraries
-    implementation("org.jetbrains.exposed:exposed-core:0.43.0")
-    implementation("org.jetbrains.exposed:exposed-dao:0.43.0")
-    implementation("org.jetbrains.exposed:exposed-jdbc:0.43.0")
-    implementation("org.jetbrains.exposed:exposed-java-time:0.43.0")
+    implementation("com.zaxxer:HikariCP:5.1.0") // Use the latest version
+    implementation("org.jetbrains.exposed:exposed-core:0.43.0") // Exposed ORM (optional)
+    implementation("org.jetbrains.exposed:exposed-dao:0.43.0")  // Exposed DAO (optional)
+    implementation("org.jetbrains.exposed:exposed-jdbc:0.43.0") // Exposed JDBC (optional)
+    implementation("org.postgresql:postgresql:42.7.2") // Example for PostgreSQL
 
-    // PostgresSQL Driver
-    implementation("org.postgresql:postgresql:42.7.2")
+    implementation("io.ktor:ktor-serialization-jackson:2.3.5") // Use the latest version
 
-    // HikariCP (Connection Pooling)
-    implementation("com.zaxxer:HikariCP:5.1.0")
-    implementation("io.ktor:ktor-serialization-jackson:2.3.5") // Ensure you use the correct version
+    implementation("org.jetbrains.exposed:exposed-java-time:0.43.0") // Use the latest version
+
+
+    implementation("io.ktor:ktor-server-auth:2.3.5") // Ktor Authentication module
+    implementation("io.ktor:ktor-server-auth-jwt:2.3.5") // Ktor JWT module
+    implementation("com.auth0:java-jwt:4.4.0") // JWT library
+
+
 }
