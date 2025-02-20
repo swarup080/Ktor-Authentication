@@ -6,12 +6,22 @@ plugins {
 group = "com.example"
 version = "0.0.1"
 
+//application {
+//    mainClass.set("io.ktor.server.netty.EngineMain")
+//
+//    val isDevelopment: Boolean = project.ext.has("development")
+//    applicationDefaultJvmArgs = listOf("-Dio.ktor.development=$isDevelopment")
+//}
 application {
-    mainClass.set("io.ktor.server.netty.EngineMain")
-
-    val isDevelopment: Boolean = project.ext.has("development")
-    applicationDefaultJvmArgs = listOf("-Dio.ktor.development=$isDevelopment")
+    mainClass.set("com.example.ApplicationKt") // Replace with your actual main class
 }
+
+tasks.withType<Jar> {
+    manifest {
+        attributes["Main-Class"] = "com.example.ApplicationKt"
+    }
+}
+
 
 repositories {
     mavenCentral()
