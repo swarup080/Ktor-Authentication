@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.kotlin.jvm)
     alias(libs.plugins.ktor)
+    id("com.github.johnrengelman.shadow") version "8.1.1"
 }
 
 group = "com.example"
