@@ -17,7 +17,17 @@ application {
     mainClass.set("com.example.ApplicationKt") // Replace with your actual main class
 }
 
-tasks.withType<Jar> {
+//tasks.withType<Jar> {
+//    manifest {
+//        attributes["Main-Class"] = "com.example.ApplicationKt"
+//    }
+//}
+tasks.withType<com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar> {
+    archiveBaseName.set("ktor-app")
+    archiveClassifier.set("")
+    archiveVersion.set("0.0.1")
+
+    mergeServiceFiles()
     manifest {
         attributes["Main-Class"] = "com.example.ApplicationKt"
     }
@@ -52,6 +62,8 @@ dependencies {
     implementation("io.ktor:ktor-server-auth:2.3.5") // Ktor Authentication module
     implementation("io.ktor:ktor-server-auth-jwt:2.3.5") // Ktor JWT module
     implementation("com.auth0:java-jwt:4.4.0") // JWT library
+    implementation("ch.qos.logback:logback-classic:1.4.14")
+
 
 
 }
