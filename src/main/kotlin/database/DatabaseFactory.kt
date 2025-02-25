@@ -25,6 +25,14 @@ object DatabaseFactory {
         config.transactionIsolation = "TRANSACTION_REPEATABLE_READ"
         config.validate()
         return HikariDataSource(config)
+//        val config = HikariConfig()
+//        config.jdbcUrl = System.getenv("DATABASE_URL") ?: "jdbc:postgresql://localhost:5432/authentication"
+//        config.driverClassName = "org.postgresql.Driver"
+//        config.maximumPoolSize = 3
+//        config.isAutoCommit = false
+//        config.transactionIsolation = "TRANSACTION_REPEATABLE_READ"
+//        config.validate()
+//        return HikariDataSource(config)
     }
 
     suspend fun <T> dbQuery(block: () -> T): T =
